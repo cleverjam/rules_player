@@ -11,9 +11,11 @@ local_repository(
 )
 
 load("@rules_player//:workspace.bzl", "deps")
+
 deps()
 
 load("@rules_player//:conf.bzl", "javascript", "kotlin")
+
 javascript()
 
 load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories", "yarn_install")
@@ -33,7 +35,9 @@ yarn_install(
 kotlin()
 
 load("@io_bazel_rules_kotlin//kotlin:core.bzl", "kt_register_toolchains")
+
 kt_register_toolchains()
 
 load("@rules_player//distribution:maven.bzl", "install")
+
 install()

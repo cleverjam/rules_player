@@ -13,7 +13,7 @@ deps()
 # Like right here
 # load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 # bazel_skylib_workspace()
-load("//:conf.bzl", "apple", "distribution", "javascript", "skylib", "kotlin")
+load("//:conf.bzl", "apple", "distribution", "javascript", "kotlin", "skylib")
 
 skylib()
 
@@ -42,7 +42,6 @@ kotlin()
 # load("//apple:support_deps.bzl", "support_deps")
 
 # support_deps()
-
 
 load("@io_bazel_rules_kotlin//kotlin:core.bzl", "kt_register_toolchains")
 
@@ -83,3 +82,15 @@ yarn_install(
     package_json = "//:package.json",
     yarn_lock = "//:yarn.lock",
 )
+
+#####################
+# Rust Dependencies #
+#####################
+load("@rules_rust//rust:repositories.bzl", "rules_rust_dependencies", "rust_register_toolchains")
+load("@rules_rust//crate_universe:repositories.bzl", "crate_universe_dependencies")
+
+crate_universe_dependencies(bootstrap = True)
+
+rules_rust_dependencies()
+
+rust_register_toolchains()
